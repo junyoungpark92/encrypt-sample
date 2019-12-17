@@ -29,8 +29,12 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
-    implementation 'com.vroong:encrypt-sdk-java:v1.191216.3'
+//    implementation 'com.vroong:encrypt-sdk-java:v1.191217.0'
+    implementation 'com.vroong:encrypt-sdk-java:test-8'
     implementation 'mysql:mysql-connector-java'
+    implementation 'org.hibernate:hibernate-envers'
+    implementation 'org.springframework.data:spring-data-envers'
+//    implementation files('lib/spring-data-envers-1.0.0.BUILD-SNAPSHOT.jar')
 }
 
 test {
