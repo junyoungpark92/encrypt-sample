@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings
+  xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm orm_2_1.xsd"
+  version="2.1">
+
+  <!--=======================================================================
+      오더 이력
+  ========================================================================-->
+
+  <sql-result-set-mapping name="User">
+    <constructor-result target-class="com.example.demo.domain.User">
+      <column name="id" class="java.lang.Integer"/>
+      <column name="name" class="java.lang.String"/>
+      <column name="nickname" class="java.lang.String"/>
+      <column name="secret_number" class="java.lang.String"/>
+      <column name="enc_DEK" class="java.lang.String"/>
+    </constructor-result>
+  </sql-result-set-mapping>
+
+  <named-native-query name="User.findUserNameRaw" result-set-mapping="User">
+    <query>
+    <![CDATA[
+      select id, name, nickname, secret_number, enc_DEK from user
+    ]]>
+    </query>
+  </named-native-query>
+</entity-mappings>
