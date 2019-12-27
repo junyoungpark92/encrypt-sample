@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import com.example.demo.domain.Location;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +10,10 @@ import lombok.Setter;
 @Setter
 public class UserDto {
   private String name;
-  private String address1;
-  private String address2;
+  private String identificationNumber;
+  private String phone;
+  private String nickname;
+  private Integer age;
+  private Location home;
+  private Location company;
 }

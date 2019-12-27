@@ -1,107 +1,67 @@
 package com.example.demo.domain;
 
-import com.vroong.encrypt.stereotype.Encrypted;
-import com.vroong.encrypt.stereotype.EncryptedKey;
-
-import javax.persistence.*;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@SecondaryTable(
-    name = "user_enc_key",
-    pkJoinColumns = @PrimaryKeyJoinColumn(name = "user_id")
-)
+@NoArgsConstructor
+@Getter
+@Setter
 @Table(name = "user")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class User extends IdentifiableUser {
 
-    @Encrypted
-    @Column(name = "name")
-    private String name;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
-    @Column(name = "nickname")
-    private String nickname;
+  @Column(name = "nickname")
+  private String nickname;
 
-    @Column(name = "secret_number")
-    private String secretNumber;
+  @Column(name = "name")
+  private String name;
 
-    @Encrypted(properties = {"address1"})
-    @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "address1", column = @Column(name = "address1")),
-        @AttributeOverride(name = "address2", column = @Column(name = "address2"))
-    })
-    private Address address;
+  @Column(name = "age")
+  private Integer age;
 
-    @EncryptedKey
-    @Column(name = "enc_DEK", table = "user_enc_key")
-    private String encDEK;
+  @Embedded
+  @AttributeOverrides({
+    @AttributeOverride(name = "address", column = @Column(name = "home_address")),
+    @AttributeOverride(name = "latLng.lat", column = @Column(name = "home_lat")),
+    @AttributeOverride(name = "latLng.lng", column = @Column(name = "home_lng"))
+  })
+  private Location home;
 
-    protected User() { }
+  @Embedded
+  @AttributeOverrides({
+    @AttributeOverride(name = "address", column = @Column(name = "company_address")),
+    @AttributeOverride(name = "latLng.lat", column = @Column(name = "company_lat")),
+    @AttributeOverride(name = "latLng.lng", column = @Column(name = "company_lng"))
+  })
+  private Location company;
 
-    public User(String name, String nickname, String secretNumber, Address address) {
-        this.name = name;
-        this.nickname = nickname;
-        this.secretNumber = secretNumber;
-        this.address = address;
-    }
-
-    public User(Integer id, String name, String nickname, String secretNumber, String encDEK, Address address) {
-        this.id = id;
-        this.name = name;
-        this.nickname = nickname;
-        this.secretNumber = secretNumber;
-        this.encDEK = encDEK;
-        this.address = address;
-    }
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getSecretNumber() {
-        return secretNumber;
-    }
-
-    public void setSecretNumber(String secretNumber) {
-        this.secretNumber = secretNumber;
-    }
-
-    public String getEncDEK() {
-        return encDEK;
-    }
-
-    public void setEncDEK(String encDEK) {
-        this.encDEK = encDEK;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+  public User(
+      String identificationNumber,
+      String phone,
+      String nickname,
+      String name,
+      Integer age,
+      Location home,
+      Location company) {
+    super(identificationNumber, phone);
+    this.nickname = nickname;
+    this.name = name;
+    this.age = age;
+    this.home = home;
+    this.company = company;
+  }
 }

@@ -6,12 +6,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Embeddable
 @Getter
 @Setter
+@Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
-public class Address {
-  private String address1;
-  private String address2;
+public class LatLng {
+  private Double lat;
+  private Double lng;
 }
