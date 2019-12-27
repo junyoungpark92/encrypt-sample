@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import com.vroong.encrypt.stereotype.Encrypted;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
@@ -14,9 +15,11 @@ import lombok.Setter;
 @MappedSuperclass
 public class IdentifiableUser {
 
-  @Column(name = "identification_number")
+  @Encrypted
+  @Column(name = "identification_number_enc")
   private String identificationNumber;
 
-  @Column(name = "phone")
+  @Encrypted
+  @Column(name = "phone_enc")
   private String phone;
 }

@@ -11,6 +11,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("select u from User u where u.id = :id")
     Optional<User> findByUserId(@Param("id") Integer id);
-
-    List<User> findByName(String name);
+    List<User> findByNameHashed(String name);
+    List<User> findByIdBetween(Integer idFrom, Integer idTo);
 }
