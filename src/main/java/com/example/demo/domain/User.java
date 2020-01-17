@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PostLoad;
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -124,6 +125,7 @@ public class User extends IdentifiableUser {
   }
 
   @PrePersist
+  @PreUpdate
   public void prePersist() {
     _origName = name;
     _origAge = getAge();
